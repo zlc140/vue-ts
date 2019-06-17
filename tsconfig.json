@@ -11,7 +11,9 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
+//    "strictPropertyInitialization": false, //空值检查
     "types": [
+      "node",
       "webpack-env"
     ],
     "paths": {

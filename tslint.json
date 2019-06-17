@@ -10,10 +10,12 @@
   },
   "rules": {
     "quotemark": [true, "single"],
-    "indent": [true, "spaces", 2],
+    "indent": [true, "spaces", 2], //使用spaces进行缩进，每次强制缩进2个字符
     "interface-name": false,
     "ordered-imports": false,
+    "semicolon":[true, "never", "ignore-interfaces"], //分号的使用规则
     "object-literal-sort-keys": false,
-    "no-consecutive-blank-lines": false
+    "no-consecutive-blank-lines": false,
+    "no-console": false // 不允许使用console对象
   }
 }
