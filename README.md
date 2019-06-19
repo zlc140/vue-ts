@@ -1,5 +1,20 @@
 # vue-ts
+```
+技术栈
 
+vue-cli3, axios, element-ui, tinymce(富文本编辑) , vuex, vue-router, 
+vuex-class(使vuex可以修饰符的方式使用)
+
+```
+```
+项目功能：
+*. 熟悉typeScript的语法和在Vue中的使用
+1. 富文本编辑
+2. elementUI 
+3. vuex
+4. 路由（权限）待开发
+
+```
 ## Project setup
 ```
 yarn install
