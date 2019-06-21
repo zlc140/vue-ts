@@ -1,9 +1,20 @@
 <template>
   <div class="home">
-    <el-button @click="changeMessage">chang Msg</el-button>
-    <h3>{{reversedMessage}}</h3>
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+<!--    <el-button @click="changeMessage">chang Msg</el-button>-->
+    <el-row :gutter="20">
+      <el-col :span="8">
+        <component is="el-button" @click="changeMessage">chang Msg</component>
+      </el-col>
+      <el-col :span="16">
+        <h3>{{reversedMessage}}</h3>
+      </el-col>
+    </el-row>
+    <el-row :gutter="20">
+        <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" @change="change"/>
+    </el-row>
+
+<!--    <img alt="Vue logo" src="../assets/logo.png">-->
+
   </div>
 </template>
 
@@ -29,6 +40,9 @@ export default class Home extends Vue {
   public getName(): string {
     const storeName = name
     return storeName
+  }
+  public change(el: any): any {
+    console.log(el,'value')
   }
   // watch 监听
   @Watch('message', {deep: true})

@@ -16,7 +16,13 @@
         </el-container>
     </el-container>
 </template>
+<script lang="ts">
+    import { Component, Vue, Watch } from 'vue-property-decorator'
+    @Component
+    export default class Home extends Vue {
 
+    }
+</script>
 <style lang="scss">
     #app > .el-container {
         /*margin-bottom: 40px;*/
@@ -45,7 +51,7 @@
             background-color: #E9EEF3;
             color: #333;
             text-align: center;
-            line-height: 160px;
+            line-height: 1.2;
             overflow-y: auto;
             height: 100%;
         }

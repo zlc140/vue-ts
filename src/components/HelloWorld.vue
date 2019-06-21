@@ -1,20 +1,44 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+<!--    <h1>{{ msg }}</h1>-->
+    <base-input placeholder="手机号码" value="input" labelText="账号: " @change="change"></base-input>
+    <base-input placeholder="请输入密码" value="password"  labelText="密码: " type="password" @change="change"></base-input>
+    <base-check labelText="记住密码: " v-model="checked"></base-check>
+    <el-button @click="sublimt">提交</el-button>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Prop, Vue, Inject, Emit } from 'vue-property-decorator'
+
 
 @Component
 export default class HelloWorld extends Vue {
   @Prop() private msg!: string
+  // @Inject() private getData!: any
+  // inject: ['getData']
+  mounted() {
+    // console.log(this.getData,'getData')
+  }
+  public checked: boolean = true
+  public input: string = 'Hello'
+  public password: string = ''
+  @Emit('change')
+  change(e:MouseEvent){
+    this[e.key] = e.value
+    console.log('emit',this.checked)
+    // this.input = e.target.value
+  }
+
+  public sublimt(): void{
+      console.log(this.checked,this.input, this.password)
+  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="scss" scoped>
+
 h3 {
   margin: 40px 0 0;
 }

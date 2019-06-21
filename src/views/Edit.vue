@@ -8,17 +8,17 @@
 </template>
 
 <script lang="ts">
-    import { Component, Vue } from 'vue-property-decorator'
-    import Editor from '@/components/tinymce.vue'
-    @Component({
-        components: {
-            Editor
-        }
-    })
-    export default class about extends Vue {
-
-        public EditorContent: string = ''
+import { Component, Vue } from 'vue-property-decorator'
+// import Editor from '@/components/tinymce.vue'
+@Component({
+    components: {
+        'Editor': () => import('@/components/tinymce.vue')
     }
+})
+export default class about extends Vue {
+
+    public EditorContent: string = ''
+}
 </script>
 <style>
     .edit-box{

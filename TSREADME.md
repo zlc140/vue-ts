@@ -143,9 +143,41 @@ class Rhino extends Animal {
 
 ```
 
+### vue-property-decorator使用指南
 
 
+1. 它包含的修饰符有
+    * @Component
+    * @Prop
+    * @Model
+    * @Watch
+    * @Emit
+    * @Inject
+    * @Provide
+    * Mixins
 
+2. @Component
+```js
+import {comA, comB} from './component'
+import {Component, Vue} from 'vue'
+@component({
+    components: {
+        comA,
+        comB
+    },
+    directives: {
+        focus: {
+            inserted: function(el) {
+                el.focus()
+            }
+        }
+    }
+})
+export default class MyCom extends Vue{
+    
+}
+
+```
 
 
 

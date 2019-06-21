@@ -5,14 +5,18 @@
 </template>
 <script lang="ts">
   import { Component, Vue, Watch } from 'vue-property-decorator'
-  import Layout from '@/views/loyout/index.vue'
+  import Layout from './views/loyout/index.vue'
   @Component({
     components: {
       Layout
     }
   })
   export default class Home extends Vue {
-
+    provide() {
+      return {
+        getData: '你好！'
+      }
+    }
   }
 </script>
 <style lang="scss">
