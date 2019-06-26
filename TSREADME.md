@@ -179,12 +179,87 @@ export default class MyCom extends Vue{
 
 ```
 
+### vue中使用 vuex=== vuex-class
 
+1. 包含的修饰符
+* @Action
+* @State
+* @Getter
+* @Mutation
+* namespace
 
+store.js
+```js
+// msg模块
+import Vuex, { ActionTree } from 'vuex'
+const state = {
+    msg: '我是msg的state'
+}
+let id = 0;
 
+const actions: ActionTree<any, any> = {
+    changeMsg ({state, commit}, msg: any) {
+        let newMsg = msg + id++;
+        commit('SET_MSG', newMsg)
+    }
+}
+export default {
+    namespaced: true, 
+    state,
+    actions: actions,
+    mutations: {
+        SET_MSG(state: any, msg: any) {
+            state.msg = msg
+        }
+    }
+}
 
-
-
+// 总的store
+export default new Vuex.Store({
+  state: {
+    token: getToken,
+    isCollape: false,
+  },
+  getters: {
+    token: (state: any) => state.token,
+    collape: (state: any) => state.isCollape,
+  },
+  actions,
+  mutations: {
+    SET_TOKEN(state: any, data: any) {
+      state.token = data
+    },
+    SET_COLLAPE(state: any) {
+      state.isCollape = !state.isCollape
+    },
+  },
+  modules: {
+    Msg
+  }
+})
+```
+:::tip
+模块的namespace设置为false,则使用的时候可以直接按照全局的方式引用，如果为true,使用则需声明模块名称
+:::
+使用该store
+```js
+import { State, Action, Getter, Mutation,namespace } from 'vuex-class'
+const msgModule = namespace('Msg'); //获取到msg模块命名空间
+@Component
+export default class About extends Vue {
+   // 两种不同的引用方法
+  // @State public isCollape!: boolean 
+  @State('isCollape') isCollape
+  @Action public toggleCollape!: any
+  @Getter public collape!: any
+  @Mutation public SET_COLLAPE!: any
+  
+  @msgModule.Action('changeMsg') changeMsg;
+  @msgModule.State(state => state.msg) msg;
+  
+  // this.toggleCollape()
+}
+```
 
 
 

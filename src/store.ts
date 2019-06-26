@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex, { ActionTree } from 'vuex'
 import { sysUserLogin } from '@/request/api/login'
 import {getToken, setToken} from '@/utils/auth'
+import Msg from './store/msg'
 Vue.use(Vuex)
 
 const actions: ActionTree<any, any> = {
@@ -39,4 +40,7 @@ export default new Vuex.Store({
       state.isCollape = !state.isCollape
     },
   },
+  modules: {
+    Msg
+  }
 })

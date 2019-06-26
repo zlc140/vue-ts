@@ -21,7 +21,7 @@ export default class HelloWorld extends Vue {
   // @Inject() private getData!: any
   // inject: ['getData']
   public mounted() {
-    // console.log(this.getData,'getData')
+    // console.log(this,'getData')
   }
   // @Emit('change')
   public change(e: any) {

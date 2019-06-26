@@ -39,7 +39,7 @@ export default class Content extends Vue {
                     return
                 }
                 const json = JSON.parse(xhr.responseText)
-                if (json.code == 0) {
+                if (json.code === 0) {
                     success(json.data[0].newFileName)
                 } else {
                     failure('HTTP Error: ' + json.msg)

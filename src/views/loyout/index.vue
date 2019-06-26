@@ -16,13 +16,13 @@
         </el-container>
     </el-container>
 </template>
-<script lang="ts">
-    import { Component, Vue, Watch } from 'vue-property-decorator'
-    @Component
-    export default class Home extends Vue {
+<!--<script lang="ts">-->
+<!--    import { Component, Vue, Watch } from 'vue-property-decorator'-->
+<!--    @Component-->
+<!--    export default class Home extends Vue {-->
 
-    }
-</script>
+<!--    }-->
+<!--</script>-->
 <style lang="scss">
     #app > .el-container {
         /*margin-bottom: 40px;*/

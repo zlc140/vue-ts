@@ -6,7 +6,7 @@
         <component is="el-button" @click="changeMessage">chang Msg</component>
       </el-col>
       <el-col :span="16">
-        <h3>{{reversedMessage}}</h3>
+        <h3>{{msg}}-{{reversedMessage}}</h3>
       </el-col>
     </el-row>
     <el-row :gutter="20">
@@ -21,6 +21,9 @@
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
+import { State, Action, Getter, Mutation, namespace } from 'vuex-class'
+
+const msgModule = namespace('Msg'); //获取到msg命名空间
 
 @Component({
   components: {
@@ -28,13 +31,21 @@ import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
   },
 })
 export default class Home extends Vue {
+  @msgModule.Action('changeMsg') changeMsg;
+  @msgModule.State(state => state.msg) msg;
+  // @State('Msg') Msg
   public message: string = 'Hello'
 //  计算属性
   private get reversedMessage(): string {
-    return this.message.split('').reverse().join('')
+      console.log(this.msg,'msg')
+    // return this.message.split('').reverse().join('')
+    //   return this.$store.state.Msg.msg
+      return this.msg.split('').reverse().join('')
   }
   // method
   public changeMessage(): void {
+      this.changeMsg(this.$store.state.Msg.msg)
+      // this.$store.dispatch('Msg/changeMsg', this.$store.state.Msg.msg)
     this.message = 'Good bye'
   }
   public getName(): string {
@@ -60,7 +71,7 @@ export default class Home extends Vue {
     console.log('created')
   }
   private mounted(): void {
-    // console.log(this.$route)
+    console.log(this.$store)
   }
   private updated(): void { console.log('updated') }
   private destroyed(): void { console.log('destroyed') }

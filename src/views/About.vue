@@ -13,7 +13,8 @@ import { State, Action, Getter, Mutation } from 'vuex-class'
 
 @Component
 export default class About extends Vue {
-  @State public isCollape!: boolean
+  // @State public isCollape!: boolean
+  @State('isCollape') isCollape
   @Action public toggleCollape!: any
   @Getter public collape!: any
   @Mutation public SET_COLLAPE!: any
