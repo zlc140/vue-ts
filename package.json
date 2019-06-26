@@ -5,7 +5,13 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test": "echo \"test\" && exit 0"
+  },
+  "pre-commit": {
+    "run": [
+      "test"
+    ]
   },
   "dependencies": {
     "@tinymce/tinymce-vue": "^2.1.0",
@@ -32,6 +38,7 @@
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.12.0",
     "page-skeleton-webpack-plugin": "^0.10.12",
+    "pre-commit": "^1.2.2",
     "sass-loader": "^7.1.0",
     "typescript": "^3.4.3",
     "vue-template-compiler": "^2.6.10"

@@ -14,55 +14,55 @@
 </template>
 
 <script lang="ts">
-    import { Component, Prop, Emit ,Vue } from 'vue-property-decorator'
+import { Component, Prop, Emit , Vue } from 'vue-property-decorator'
 
-    @Component({
-        directives: {
-            focus: {
-                inserted: function(el) {
-                    el.focus()
-                }
-            }
-        }
-    })
-    export default class baseInput extends Vue {
-        public inputValue:string = ''
+@Component({
+    directives: {
+        focus: {
+            inserted(el) {
+                el.focus()
+            },
+        },
+    },
+})
+export default class BaseInput extends Vue {
+    public inputValue: string = ''
 
-        @Prop({
-            type: String,
-            default: ''
-        }) private value!:string;
-        @Prop({
-            type: String,
-            default: ''
-        }) private labelText!:string;
-        @Prop({
-            type: String,
-            default: 'text'
-        }) private type!: type;
+    @Prop({
+        type: String,
+        default: '',
+    }) private value!: string
+    @Prop({
+        type: String,
+        default: '',
+    }) private labelText!: string
+    @Prop({
+        type: String,
+        default: 'text',
+    }) private type!: string
 
-        @Prop({
-            type: String,
-            default: '请输入内容',
-        //    如果是对象或者数组
-        //     default: () => {
-        //         return ['a', 'b']
-        //     }
-            required: true,
-        //     validator: (value) => {
-        //         return [
-        //             'error',
-        //             'haha'
-        //         ].indexOf(value) !== -1
-        //     }
-        }) private placeholder!:string;
+    @Prop({
+        type: String,
+        default: '请输入内容',
+    //    如果是对象或者数组
+    //     default: () => {
+    //         return ['a', 'b']
+    //     }
+        required: true,
+    //     validator: (value) => {
+    //         return [
+    //             'error',
+    //             'haha'
+    //         ].indexOf(value) !== -1
+    //     }
+    }) private placeholder!: string
 
-        @Emit('change')
-        change(e:MouseEvent) {
-            return {key: this.value,value: e}
-        }
-
+    @Emit('change')
+    public change(e: MouseEvent) {
+        return {key: this.value, value: e}
     }
+
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

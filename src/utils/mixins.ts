@@ -3,7 +3,7 @@ import Component from 'vue-class-component'
 
 @Component
 export class MyMixin extends Vue {
-    created() {
+    public created() {
         console.log('I`m in mixins!')
     }
 

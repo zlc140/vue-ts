@@ -42,19 +42,19 @@ export default class Home extends Vue {
     return storeName
   }
   public change(el: any): any {
-    console.log(el,'value')
+    console.log(el, 'value')
   }
   // watch 监听
   @Watch('message', {deep: true})
   public watchCount(newVal: any, val: any) {
     console.log('watch', newVal, val)
   }
-  // 监听路由
-  @Watch('$route', {deep: true})
-  onChildChanged(route: any, oldRoute: any): void {
-    console.log('route, ', route, oldRoute)
-    // this.$forceUpdate()//强刷当前
-  }
+// 监听路由
+    @Watch('$route', {deep: true})
+    public onChildChanged(route: any, oldRoute: any): void {
+        console.log('route1, ', route, oldRoute)
+        // this.$forceUpdate()//强刷当前
+    }
   // 生命周期
   private created(): void {
     console.log('created')

@@ -12,10 +12,10 @@ import { Component, Vue } from 'vue-property-decorator'
 // import Editor from '@/components/tinymce.vue'
 @Component({
     components: {
-        'Editor': () => import('@/components/tinymce.vue')
-    }
+        Editor: () => import('@/components/tinymce.vue'),
+    },
 })
-export default class about extends Vue {
+export default class Edit extends Vue {
 
     public EditorContent: string = ''
 }

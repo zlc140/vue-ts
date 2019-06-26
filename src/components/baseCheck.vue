@@ -8,30 +8,30 @@
                 @change="change"
                   />
     </div>
-    <!--    <component is="el-input" type="text" :value="value" @change="inputChange"></component>-->
+
 </template>
 
 <script lang="ts">
-    import { Component, Prop, Emit ,Vue, Model } from 'vue-property-decorator'
+import { Component, Prop, Emit , Vue, Model } from 'vue-property-decorator'
 
-    @Component
-    export default class baseInput extends Vue {
-        public inputValue:string = ''
-        @Prop({
-            type: String,
-            default: ''
-        }) private labelText!:string;
-        @Model('change', {
-            type: Boolean
-        })
-        checked!: boolean;
+@Component
+export default class BaseInput extends Vue {
+    public inputValue: string = ''
+    @Model('change', {
+        type: Boolean,
+    }) public checked!: boolean
+    @Prop({
+        type: String,
+        default: '',
+    }) private labelText!: string
 
-        @Emit('change')
-        change(e:MouseEvent) {
-            return e.target.checked
-        }
-
+    @Emit('change')
+    public change(e: MouseEvent) {
+        const target = e.target ? e.target.checked : false
+        return target
     }
+
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

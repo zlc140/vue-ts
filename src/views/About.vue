@@ -8,29 +8,29 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator'
-  import { State, Action, Getter, Mutation } from "vuex-class";
+import { Component, Vue } from 'vue-property-decorator'
+import { State, Action, Getter, Mutation } from 'vuex-class'
 
-  @Component
-  export default class about extends Vue {
-    @State isCollape!: boolean;
-    @Action toggleCollape!: any;
-    @Getter collape!: any;
-    @Mutation SET_COLLAPE!: any;
+@Component
+export default class About extends Vue {
+  @State public isCollape!: boolean
+  @Action public toggleCollape!: any
+  @Getter public collape!: any
+  @Mutation public SET_COLLAPE!: any
 
-    created() {
-      console.log(this.collape)
-    }
-
-
-    private get getCollape(): string {
-      return this.isCollape ? '打开true': '关闭false'
-    }
-
-    public toggle(): void {
-      // 通过vuex-class封装后直接使用就可
-      // this.toggleCollape()
-      this.SET_COLLAPE()
-    }
+  public created() {
+    console.log(this.collape)
   }
+
+  // 计算属性通过getter的get
+  private get getCollape(): string {
+    return this.isCollape ? '打开true' : '关闭false'
+  }
+
+  public toggle(): void {
+    // 通过vuex-class封装后直接使用就可
+    // this.toggleCollape()
+    this.SET_COLLAPE()
+  }
+}
 </script>

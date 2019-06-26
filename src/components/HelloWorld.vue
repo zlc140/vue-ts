@@ -14,24 +14,24 @@ import { Component, Prop, Vue, Inject, Emit } from 'vue-property-decorator'
 
 @Component
 export default class HelloWorld extends Vue {
-  @Prop() private msg!: string
-  // @Inject() private getData!: any
-  // inject: ['getData']
-  mounted() {
-    // console.log(this.getData,'getData')
-  }
   public checked: boolean = true
   public input: string = 'Hello'
   public password: string = ''
-  @Emit('change')
-  change(e:MouseEvent){
+  @Prop() private msg!: string
+  // @Inject() private getData!: any
+  // inject: ['getData']
+  public mounted() {
+    // console.log(this.getData,'getData')
+  }
+  // @Emit('change')
+  public change(e: any) {
     this[e.key] = e.value
-    console.log('emit',this.checked)
+    // console.log('emit',this.checked)
     // this.input = e.target.value
   }
-
-  public sublimt(): void{
-      console.log(this.checked,this.input, this.password)
+    @Emit()
+  public sublimt(): void {
+      console.log(this.checked, this.input, this.password)
   }
 }
 </script>
