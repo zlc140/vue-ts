@@ -3,9 +3,9 @@ import * as ElementUI from 'element-ui'
 import router from './router'
 import store from './store'
 import './permission'
-import 'element-ui/lib/theme-chalk/index.css'
-import 'element-ui/lib/index.js'
-import '@/assets/css/index.css'
+// import 'element-ui/lib/theme-chalk/index.css'
+// import 'element-ui/lib/index.js'
+import 'assets/css/index.css'
 import App from './App.vue'
 // 自动全局注册components下的组件
 const requireComponents = require.context(

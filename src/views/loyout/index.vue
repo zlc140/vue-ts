@@ -1,14 +1,15 @@
 <template>
     <el-container class="view-box">
         <el-header>
-            <div id="nav">
-                <router-link to="/home">Home</router-link> |
-                <router-link to="/about">About</router-link> |
-                <router-link to="/edit">Edit</router-link>
-            </div>
+             <div class="img-box">
+                 <img src="@/assets/logo.jpg" alt="">
+             </div>
+            <span class="title">欢迎进入vue-cli3管理系统</span>
         </el-header>
         <el-container>
-            <el-aside width="200px">Aside</el-aside>
+            <el-aside width="200px">
+                <nav-bar></nav-bar>
+            </el-aside>
             <el-container>
                 <el-main><router-view/></el-main>
 <!--                <el-footer>Footer</el-footer>-->
@@ -16,13 +17,19 @@
         </el-container>
     </el-container>
 </template>
-<!--<script lang="ts">-->
-<!--    import { Component, Vue, Watch } from 'vue-property-decorator'-->
-<!--    @Component-->
-<!--    export default class Home extends Vue {-->
+<script lang="ts">
+    import { Component, Vue, Watch } from 'vue-property-decorator'
+    import { NavBar } from '@/components'
 
-<!--    }-->
-<!--</script>-->
+    @Component({
+        components: {
+            NavBar
+        }
+    })
+    export default class Home extends Vue {
+
+    }
+</script>
 <style lang="scss">
     #app > .el-container {
         /*margin-bottom: 40px;*/
@@ -34,7 +41,7 @@
     .view-box{
 
         .el-header, .el-footer {
-            background-color: #B3C0D1;
+            background-color: #333;
             color: #333;
             text-align: center;
             line-height: 60px;
@@ -55,15 +62,22 @@
             overflow-y: auto;
             height: 100%;
         }
-
-
-        #nav a {
-            font-weight: bold;
-            color: #2c3e50;
+        .el-header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-flow: row nowrap;
         }
-
-        #nav a.router-link-exact-active {
-            color: #42b983;
+        .img-box{
+            height: 100%;
+            padding: 5px;
+            img{
+                height: 100%;
+            }
+        }
+        .title{
+            color: #fff;
+            font-size: 20px;
         }
     }
 </style>

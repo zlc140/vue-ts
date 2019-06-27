@@ -1,13 +1,39 @@
-import Axios from 'axios'
+import * as Axios from 'axios'
 import { Message } from 'element-ui'
 import { getToken } from '@/utils/auth'
+import { AxiosResponse, AxiosRequestConfig } from 'axios'
+
+const service = Axios.default.create({
+    baseURL: '',
+    timeout: 0,
+    maxContentLength: 4000,
+})
+
+service.interceptors.request.use((config: AxiosRequestConfig) => {
+    return config
+}, (error: any) => {
+    Promise.reject(error)
+})
+
+service.interceptors.response.use(
+    (response: AxiosResponse) => {
+        if (response.status !== 200) {
+            Message({
+                type: 'error',
+                message: '请求错误',
+            })
+        } else {
+            return response.data
+        }
+    },
+    (error: any) => {
+        return Promise.reject(error)
+})
 
 const httpServer = (opts: any) => {
     const defaultOpts = {
         method: opts.method || 'get',
-        baseURL: '',
         url: opts.url,
-        timeout: 10000,
         params: opts.params,
         data: opts.params,
         headers: opts.method === 'get' ? {
@@ -32,7 +58,7 @@ const httpServer = (opts: any) => {
     }
 
     const promise = new Promise((resolve, reject) => {
-        Axios(defaultOpts).then((res) => {
+        service(defaultOpts).then((res) => {
             if (res) {
                 resolve(res)
             }

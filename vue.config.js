@@ -1,3 +1,5 @@
+const path =  require('path'); //引入path模块（node）
+const resolve = (dir) => path.join(__dirname, dir); //将文件组成绝对路径
 // vue.config.js
 module.exports = {
     // 选项...
@@ -14,7 +16,7 @@ module.exports = {
     filenameHashing:true,
     // 多页面
     pages:undefined,
-    // 编译警告
+    // 编译警告  // eslint-loader 是否在保存的时候检查 安装@vue/cli-plugin-eslint有效
     lintOnSave:false,
     // 是否使用包含运行时编译器的 Vue 构建版本。设置为 true 后你就可以在 Vue 组件中使用 template 选项了，但是这会让你的应用额外增加 10kb 左右。
     runtimeCompiler:false,
@@ -28,14 +30,78 @@ module.exports = {
     integrity:false,
     // 反向代理
     devServer:{
-        // devServer: {
-        //     proxy: {
-        //       '/api': {
-        //         target: '1',
-        //         ws: true,
-        //         changeOrigin: true
-        //       }
-        //     }
+        // open: true,
+        // host: '0.0.0.0',
+        // port: 8080,
+        // https: false,
+        // hotOnly: false,
+        // proxy: {
+        //   '/api': {
+        //     target: '1',
+        //     ws: true,
+        //     changeOrigin: true
+        //   }
         // }
+    },
+    chainWebpack: config => {
+        // 添加别名
+        config.resolve.alias
+            .set('@', resolve('src'))
+            .set('assets', resolve('src/assets'))
+            .set('components', resolve('src/components'))
+
+        config.css = { // 配置高于chainWebpack中关于css loader的配置
+            // modules: true, //// 是否开启支持‘foo.module.css'样式
+            extract: true, // 是否使用css分离插件 ExtractTextPlugin，采用独立样式文件载入，不采用<style>方式内联至html文件中
+            sourceMap: false, // 是否在构建样式地图，false将提高构建速度
+            loaderOptions: { // css预设器配置项
+                css: {
+                    localIdentName: '[name]-[hash]',
+                    camelCase: 'only'
+                },
+                stylus: {}
+            }
+        }
+    },
+    configureWebpack: config => {
+        config.externals = {
+            'vue': 'Vue',
+            'tinymce': 'tinymce',
+            'element-ui': 'ELEMENT'
+        }
+        config.optimization = {
+            splitChunks: {
+                cacheGroups: {
+                    vendor: {
+                        chunks:"all",
+                            test: /node_modules/,
+                            name:"vendor",
+                            minChunks: 1,
+                            maxInitialRequests: 5,
+                            minSize: 0,
+                            priority:100,
+                    },
+                    common: {
+                        chunks:"all",
+                            test:/[\\/]src[\\/]js[\\/]/,
+                            name: "common",
+                            minChunks: 2,
+                            maxInitialRequests: 5,
+                            minSize: 0,
+                            priority:60
+                    },
+                    styles: {
+                        name: 'styles',
+                            test: /\.(sa|sc|c)ss$/,
+                            chunks: 'all',
+                            enforce: true,
+                    },
+                    runtimeChunk: {
+                        name: 'manifest'
+                    }
+                }
+            }
+        }
+
     }
 }

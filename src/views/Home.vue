@@ -19,11 +19,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
+import { Component, Vue, Watch, Inject } from 'vue-property-decorator'
 import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
 import { State, Action, Getter, Mutation, namespace } from 'vuex-class'
 
-const msgModule = namespace('Msg'); //获取到msg命名空间
+const msgModule = namespace('Msg') // 获取到msg命名空间
 
 @Component({
   components: {
@@ -31,13 +31,15 @@ const msgModule = namespace('Msg'); //获取到msg命名空间
   },
 })
 export default class Home extends Vue {
-  @msgModule.Action('changeMsg') changeMsg;
-  @msgModule.State(state => state.msg) msg;
+  @msgModule.Action('changeMsg') public changeMsg: any
+  @msgModule.State((state) => state.msg) public msg: any
+  @Inject('User') private hellData!: any
+
   // @State('Msg') Msg
   public message: string = 'Hello'
 //  计算属性
   private get reversedMessage(): string {
-      console.log(this.msg,'msg')
+      console.log(this.msg, 'msg')
     // return this.message.split('').reverse().join('')
     //   return this.$store.state.Msg.msg
       return this.msg.split('').reverse().join('')
@@ -46,7 +48,7 @@ export default class Home extends Vue {
   public changeMessage(): void {
       this.changeMsg(this.$store.state.Msg.msg)
       // this.$store.dispatch('Msg/changeMsg', this.$store.state.Msg.msg)
-    this.message = 'Good bye'
+      this.message = 'Good bye'
   }
   public getName(): string {
     const storeName = name
@@ -68,7 +70,7 @@ export default class Home extends Vue {
     }
   // 生命周期
   private created(): void {
-    console.log('created')
+    console.log('created',this.hellData)
   }
   private mounted(): void {
     console.log(this.$store)

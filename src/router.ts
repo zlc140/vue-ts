@@ -28,5 +28,15 @@ export default new Router({
       name: 'edit',
       component: () => import(/* webpackChunkName: "about" */ './views/Edit.vue'),
     },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import(/* webpackChunkName: "about" */ './views/login.vue'),
+    },
+    {
+      path: '/table',
+      name: 'table',
+      component: () => import(/* webpackChunkName: "about" */ './views/table.vue'),
+    },
   ],
 })

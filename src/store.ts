@@ -41,6 +41,6 @@ export default new Vuex.Store({
     },
   },
   modules: {
-    Msg
-  }
+    Msg,
+  },
 })
