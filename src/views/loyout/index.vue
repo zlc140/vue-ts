@@ -11,24 +11,28 @@
                 <nav-bar></nav-bar>
             </el-aside>
             <el-container>
-                <el-main><router-view/></el-main>
+                <el-main>
+                    <keep-alive include="Home,About">
+                        <router-view/>
+                    </keep-alive>
+                </el-main>
 <!--                <el-footer>Footer</el-footer>-->
             </el-container>
         </el-container>
     </el-container>
 </template>
 <script lang="ts">
-    import { Component, Vue, Watch } from 'vue-property-decorator'
-    import { NavBar } from '@/components'
+import { Component, Vue, Watch } from 'vue-property-decorator'
+import { NavBar } from '@/components'
 
-    @Component({
-        components: {
-            NavBar
-        }
-    })
-    export default class Home extends Vue {
+@Component({
+    components: {
+        NavBar,
+    },
+})
+export default class Home extends Vue {
 
-    }
+}
 </script>
 <style lang="scss">
     #app > .el-container {

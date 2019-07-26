@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-//tinymce这个组件直接通过import引入会有报错，所以通过cdn引入；
+// tinymce这个组件直接通过import引入会有报错，所以通过cdn引入；
 // import 'tinymce/tinymce'
 import 'tinymce/themes/silver/theme'
 import Editor from '@tinymce/tinymce-vue'

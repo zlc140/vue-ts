@@ -1,4 +1,4 @@
-import Http from '@/request';
+import Http from '@/request'
 
 /**
  * 总系统角色菜单 | 根据用户ID获取所属角色的菜单
@@ -8,5 +8,5 @@ export const manageSysRoleMenuUserId = (userId: any) => {
     return Http({
         url: `/xxx/${userId}`,
         method: 'post',
-    });
-};
+    })
+}

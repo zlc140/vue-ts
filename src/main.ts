@@ -36,6 +36,7 @@ requireComponents.keys().forEach((fileName?: string) => {
   let componentName: string = arrName.pop().replace(/\.\w+$/, '')
 
   componentName = componentName.charAt(0).toUpperCase() + componentName.slice(1)
+  // console.log(componentName)
   // 全局注册组件
   Vue.component(
       componentName,

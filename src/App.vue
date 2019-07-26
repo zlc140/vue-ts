@@ -10,11 +10,11 @@ import Layout from './views/loyout/index.vue'
 
 @Component({
   components: {
-    Layout
+    Layout,
   },
 })
 export default class Home extends Vue {
-  @Model('change') input: any;
+  @Model('change') public input: any
   @Provide() private getData: string = '你好'
   @Provide('User') private hellData: string = 'user,你好'
   // 监听路由

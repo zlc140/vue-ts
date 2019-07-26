@@ -10,7 +10,7 @@
       </el-col>
     </el-row>
     <el-row :gutter="20">
-        <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" @change="change"/>
+        <HelloWorld :msg="message" :obj="obj" @change="change"/>
     </el-row>
 
 <!--    <img alt="Vue logo" src="../assets/logo.png">-->
@@ -31,12 +31,6 @@ const msgModule = namespace('Msg') // 获取到msg命名空间
   },
 })
 export default class Home extends Vue {
-  @msgModule.Action('changeMsg') public changeMsg: any
-  @msgModule.State((state) => state.msg) public msg: any
-  @Inject('User') private hellData!: any
-
-  // @State('Msg') Msg
-  public message: string = 'Hello'
 //  计算属性
   private get reversedMessage(): string {
       console.log(this.msg, 'msg')
@@ -44,6 +38,15 @@ export default class Home extends Vue {
     //   return this.$store.state.Msg.msg
       return this.msg.split('').reverse().join('')
   }
+  @msgModule.Action('changeMsg') public changeMsg: any
+  @msgModule.State((state) => state.msg) public msg: any
+
+  // @State('Msg') Msg
+  public message: string = 'Hello'
+    public obj: object = {
+      name: 'lzc'
+    }
+  @Inject('User') private hellData!: any
   // method
   public changeMessage(): void {
       this.changeMsg(this.$store.state.Msg.msg)
@@ -55,7 +58,8 @@ export default class Home extends Vue {
     return storeName
   }
   public change(el: any): any {
-    console.log(el, 'value')
+
+    console.log(el, this.obj,this.message ,'value')
   }
   // watch 监听
   @Watch('message', {deep: true})
@@ -70,7 +74,7 @@ export default class Home extends Vue {
     }
   // 生命周期
   private created(): void {
-    console.log('created',this.hellData)
+    console.log('created', this.hellData)
   }
   private mounted(): void {
     console.log(this.$store)

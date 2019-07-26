@@ -24,7 +24,7 @@
                 </el-col>
             </el-form-item>
             <el-form-item label="即时配送" prop="delivery">
-                <el-switch v-model="ruleForm.delivery"></el-switch>
+                <el-switch v-model="ruleForm.delivery" @change="handleChange"></el-switch>
             </el-form-item>
             <el-form-item label="活动性质" prop="type">
                 <el-checkbox-group v-model="ruleForm.type">
@@ -52,84 +52,101 @@
 </template>
 
 <script lang="ts">
-    import { Component, Vue } from 'vue-property-decorator'
-    import { State, Action, Getter, Mutation } from 'vuex-class'
+import { Component, Vue } from 'vue-property-decorator'
+import { State, Action, Getter, Mutation } from 'vuex-class'
 
-    interface formInterface {
-        name?: string,
-        region?: string,
-        date1?: any,
-        date2?: any,
-        delivery?: boolean,
-        type?: any,
-        resource?: any,
-        desc?: string
+interface formInterface {
+    name?: string,
+    region?: string,
+    date1?: any,
+    date2?: any,
+    delivery?: boolean,
+    type?: any,
+    resource?: any,
+    desc?: string
+}
+
+@Component
+export default class About extends Vue {
+    // @State public isCollape!: boolean
+    @State('isCollape') public isCollape: any
+    @Action public toggleCollape!: any
+    @Getter public collape!: any
+    @Mutation public SET_COLLAPE!: any
+    public rules: any = {
+        name: [
+            { required: true, message: '请输入活动名称', trigger: 'blur' },
+            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' },
+        ],
+        region: [
+            { required: true, message: '请选择活动区域', trigger: 'change' },
+        ],
+        date1: [
+            { type: 'date', required: true, message: '请选择日期', trigger: 'change' },
+        ],
+        date2: [
+            { type: 'date', required: true, message: '请选择时间', trigger: 'change' },
+        ],
+        type: [
+            { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' },
+        ],
+        resource: [
+            { required: true, message: '请选择活动资源', trigger: 'change' },
+        ],
+        desc: [
+            { required: true, message: '请填写活动形式', trigger: 'blur' },
+        ],
+    }
+    public ruleForm: formInterface = {
+        name: '',
+        type: [],
+        delivery: false,
+
+    }
+    public created() {
+
+    }
+    mounted() {
+        let _this = this;
+        setTimeout(function() {
+            _this.ruleForm.delivery = true;
+        },0)
+
+        this.$nextTick(function() {
+            if(this.ruleForm.delivery) {
+            _this.ruleForm.name = '123'
+            }
+        })
+
+        console.log(this.ruleForm)
+    }
+    public handleChange() {
+
+    }
+    // 计算属性通过getter的get
+    private get getCollape(): string {
+        return this.isCollape ? '打开true' : '关闭false'
     }
 
-    @Component
-    export default class About extends Vue {
-        // @State public isCollape!: boolean
-        @State('isCollape') public isCollape: any
-        @Action public toggleCollape!: any
-        @Getter public collape!: any
-        @Mutation public SET_COLLAPE!: any
-        public rules: any = {
-            name: [
-                { required: true, message: '请输入活动名称', trigger: 'blur' },
-                { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-            ],
-            region: [
-                { required: true, message: '请选择活动区域', trigger: 'change' }
-            ],
-            date1: [
-                { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-            ],
-            date2: [
-                { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
-            ],
-            type: [
-                { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
-            ],
-            resource: [
-                { required: true, message: '请选择活动资源', trigger: 'change' }
-            ],
-            desc: [
-                { required: true, message: '请填写活动形式', trigger: 'blur' }
-            ]
-        }
-        public ruleForm: formInterface = {
-            type: [],
-            delivery: false
-
-        }
-        public created() {
-            console.log(this.ruleForm)
-        }
-
-        // 计算属性通过getter的get
-        private get getCollape(): string {
-            return this.isCollape ? '打开true' : '关闭false'
-        }
-
-        public toggle(): void {
-            // 通过vuex-class封装后直接使用就可
-            // this.toggleCollape()
-            this.SET_COLLAPE()
-        }
-        public resetForm(formName) {
-            this.$refs[formName].resetFields();
-        }
-        public submitForm(formName: any):void {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                     console.log(this.ruleForm)
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }
-            });
-        }
+    public toggle(): void {
+        // 通过vuex-class封装后直接使用就可
+        // this.toggleCollape()
+        this.SET_COLLAPE()
     }
+    public resetForm(formName) {
+        this.$refs[formName].resetFields()
+    }
+    public submitForm(formName: any): void {
+        this.$refs[formName].validate((valid) => {
+            if (valid) {
+                 console.log(this.ruleForm)
+            } else {
+                console.log('error submit!!')
+                return false
+            }
+        })
+    }
+}
 </script>
 <style>
     .el-form-item__content{

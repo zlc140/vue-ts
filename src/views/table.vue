@@ -50,40 +50,40 @@
 </template>
 
 <script lang="ts">
-    import { Component, Vue } from 'vue-property-decorator'
-    import { State, Action, Getter, Mutation } from 'vuex-class'
+import { Component, Vue } from 'vue-property-decorator'
+import { State, Action, Getter, Mutation } from 'vuex-class'
 
-    @Component
-    export default class About extends Vue {
-        public tableData: any = [
-            {
-                date: '2016-05-02',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄',
-                tag: '家'
-            }, {
-                date: '2016-05-04',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1517 弄',
-                tag: '公司'
-            }
-        ]
+@Component
+export default class About extends Vue {
+    public tableData: any = [
+        {
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄',
+            tag: '家',
+        }, {
+            date: '2016-05-04',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1517 弄',
+            tag: '公司',
+        },
+    ]
 
-        public  resetDateFilter():void {
-            this.$refs.filterTable.clearFilter('date');
-        }
-        public clearFilter():void {
-            this.$refs.filterTable.clearFilter();
-        }
-        public formatter(row: any, column: any):void {
-            return row.address;
-        }
-        public filterTag(value: any, row: any):void {
-            return row.tag === value;
-        }
-        public filterHandler(value: any, row: any, column: any):void {
-            const property = column['property'];
-            return row[property] === value;
-        }
+    public  resetDateFilter(): void {
+        this.$refs.filterTable.clearFilter('date')
     }
+    public clearFilter(): void {
+        this.$refs.filterTable.clearFilter()
+    }
+    public formatter(row: any, column: any): any {
+        return row.address
+    }
+    public filterTag(value: any, row: any): any {
+        return row.tag === value
+    }
+    public filterHandler(value: any, row: any, column: any): void {
+        const property = column.property
+        return row[property] === value
+    }
+}
 </script>
